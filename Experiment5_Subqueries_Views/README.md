@@ -1,161 +1,195 @@
-# Experiment 5: Subqueries and Views
+# Experiment 4: Aggregate Functions, Group By and Having Clause
 
 ## AIM
-To study and implement subqueries and views.
+To study and implement aggregate functions, GROUP BY, and HAVING clause with suitable examples.
 
 ## THEORY
 
-### Subqueries
-A subquery is a query inside another SQL query and is embedded in:
-- WHERE clause
-- HAVING clause
-- FROM clause
+### Aggregate Functions
+These perform calculations on a set of values and return a single value.
 
-**Types:**
-- **Single-row subquery**:
-  Sub queries can also return more than one value. Such results should be made use along with the operators in and any.
-- **Multiple-row subquery**:
-  Here more than one subquery is used. These multiple sub queries are combined by means of ‘and’ & ‘or’ keywords.
-- **Correlated subquery**:
-  A subquery is evaluated once for the entire parent statement whereas a correlated Sub query is evaluated once per row processed by the parent statement.
+- **MIN()** – Smallest value  
+- **MAX()** – Largest value  
+- **COUNT()** – Number of rows  
+- **SUM()** – Total of values  
+- **AVG()** – Average of values
 
-**Example:**
+**Syntax:**
 ```sql
-SELECT * FROM employees
-WHERE salary > (SELECT AVG(salary) FROM employees);
+SELECT AGG_FUNC(column_name) FROM table_name WHERE condition;
 ```
-### Views
-A view is a virtual table based on the result of an SQL SELECT query.
-**Create View:**
+### GROUP BY
+Groups records with the same values in specified columns.
+**Syntax:**
 ```sql
-CREATE VIEW view_name AS
-SELECT column1, column2 FROM table_name WHERE condition;
+SELECT column_name, AGG_FUNC(column_name)
+FROM table_name
+GROUP BY column_name;
 ```
-**Drop View:**
+### HAVING
+Filters the grouped records based on aggregate conditions.
+**Syntax:**
 ```sql
-DROP VIEW view_name;
+SELECT column_name, AGG_FUNC(column_name)
+FROM table_name
+GROUP BY column_name
+HAVING condition;
 ```
 
 **Question 1**
 --
--- Paste Question 1 here
+![image](https://github.com/user-attachments/assets/d2d5144f-21cb-47f8-a790-865613b5d4d9)
+
 
 ```sql
--- Paste your SQL code below for Question 1
+select doctorid,count(appointmentid) as TotalAppointments
+from Appointments 
+group by doctorid;
 ```
 
 **Output:**
+![image](https://github.com/user-attachments/assets/8da944cb-ca86-44d6-bd0c-7c065b3790be)
 
-![Output1](output.png)
 
 **Question 2**
 ---
--- Paste Question 2 here
+![image](https://github.com/user-attachments/assets/d34d3d04-92cc-472f-a035-ef7860f3bfff)
+
 
 ```sql
--- Paste your SQL code below for Question 2
+select doctorid,count(appointmentid) as TotalAppointments
+from Appointments 
+group by doctorid;
 ```
 
 **Output:**
 
-![Output2](output.png)
+![image](https://github.com/user-attachments/assets/8f08a5c5-4dcd-4fe8-9087-3bcb4538ff63)
+
 
 **Question 3**
 ---
--- Paste Question 3 here
+![image](https://github.com/user-attachments/assets/d789e34a-7914-4d7c-84c3-b04ebc11a29a)
+
 
 ```sql
--- Paste your SQL code below for Question 3
+select doctorid,count(recordid) as TotalRecords
+from MedicalRecords 
+group by doctorid;
 ```
 
 **Output:**
 
-![Output3](output.png)
+![image](https://github.com/user-attachments/assets/2c9b8104-e6eb-49f2-aea8-0a61c956d2e0)
+
 
 **Question 4**
 ---
--- Paste Question 4 here
+![image](https://github.com/user-attachments/assets/425ab76d-438c-4f46-8add-7fd360bf9643)
+
 
 ```sql
--- Paste your SQL code below for Question 4
+select max(purch_amt)as MAXIMUM from orders;
 ```
 
 **Output:**
 
-![Output4](output.png)
+![image](https://github.com/user-attachments/assets/27f3df83-d7ef-48c9-95a0-1d87c33f7caf)
+
 
 **Question 5**
 ---
--- Paste Question 5 here
+![image](https://github.com/user-attachments/assets/e3bcd3bc-46d7-409f-a884-bc783fc330bc)
+
 
 ```sql
--- Paste your SQL code below for Question 5
+select count(DISTINCT salesman_id) as COUNT from orders;
 ```
 
 **Output:**
 
-![Output5](output.png)
+![image](https://github.com/user-attachments/assets/1438e0cb-c8b3-4476-b889-c99e1002d1c5)
+
 
 **Question 6**
 ---
--- Paste Question 6 here
+![image](https://github.com/user-attachments/assets/d30050ca-d8cd-439d-af4c-f6f25f9494dd)
+
 
 ```sql
--- Paste your SQL code below for Question 6
+select name, length(name) as length from customer order by length(name) desc limit 1;
 ```
 
 **Output:**
 
-![Output6](output.png)
+![image](https://github.com/user-attachments/assets/b4805d2d-3040-45e7-9116-a54d120d5763)
+
 
 **Question 7**
 ---
--- Paste Question 7 here
+![image](https://github.com/user-attachments/assets/d72669ca-f950-4244-af21-d4e14e39b39f)
+
 
 ```sql
--- Paste your SQL code below for Question 7
+select avg(income) as Average_Salary from employee;
 ```
 
 **Output:**
 
-![Output7](output.png)
+![image](https://github.com/user-attachments/assets/44de571e-76ae-46b0-8307-cf0f85872b44)
+
 
 **Question 8**
 ---
--- Paste Question 8 here
+![image](https://github.com/user-attachments/assets/701bd100-3644-426f-b499-ac3841416cff)
+
 
 ```sql
--- Paste your SQL code below for Question 8
+select age,MIN(income) 
+from employee 
+group by age 
+having MIN(income)<400000;
 ```
 
 **Output:**
 
-![Output8](output.png)
+![image](https://github.com/user-attachments/assets/5a28825d-370a-49be-bdd2-06914497c6ac)
+
 
 **Question 9**
 ---
--- Paste Question 9 here
+![image](https://github.com/user-attachments/assets/a7d61588-54f8-4bef-9740-3e12dbdadf75)
+
 
 ```sql
--- Paste your SQL code below for Question 9
+select address,SUM(salary)
+from customer1
+group by address 
+having SUM(salary)>2000;
 ```
 
 **Output:**
 
-![Output9](output.png)
+![image](https://github.com/user-attachments/assets/aa47256b-4185-4918-a6a8-4c230fa72cf5)
+
 
 **Question 10**
 ---
--- Paste Question 10 here
+![image](https://github.com/user-attachments/assets/81a2398d-2be5-4d5e-854e-0f85ca7923c1)
+
 
 ```sql
--- Paste your SQL code below for Question 10
+select jdate,MAX(workhour)
+from employee1
+group by jdate 
+having MAX(workhour)>12;
 ```
 
 **Output:**
 
-![Output10](output.png)
+
+![image](https://github.com/user-attachments/assets/d83c5036-96c8-4732-9060-f53123160c2e)
 
 
 ## RESULT
-Thus, the SQL queries to implement subqueries and views have been executed successfully.
+Thus, the SQL queries to implement aggregate functions, GROUP BY, and HAVING clause have been executed successfully.
