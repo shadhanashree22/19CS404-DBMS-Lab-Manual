@@ -1,4 +1,7 @@
 # Experiment 10: PL/SQL – Triggers
+###  REG NO :212223230202
+### NAME : S V SHADHANASHREE
+### DATE : 15/05/2025
 
 ## AIM
 To write and execute PL/SQL trigger programs for automating actions in response to specific table events like INSERT, UPDATE, or DELETE.
